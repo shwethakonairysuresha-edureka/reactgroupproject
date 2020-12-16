@@ -9,7 +9,7 @@ export default class Landing extends Component {
           <div class="container">
             <div class="row">
               <div class="col-md-12 text-center">
-                <h1 class="display-3 mb-4">Admin Dashboard</h1>
+                <h1 class="display-3 mb-4">Review</h1>
                 <p class="lead">
                   {" "}
                   Create a developer profile/portfolio, share posts and get help
@@ -17,32 +17,32 @@ export default class Landing extends Component {
                 </p>
                 <hr />
                 <Link
-                  href="product.html"
+                  href="addreview.html"
                   class="btn btn-lg btn-info mr-2"
-                  to="/product"
+                  to="/addreview"
                 >
-                  Product
+                  Add Review
                 </Link>
                 <Link
-                  href="stock.html"
+                  href="updatereview.html"
                   class="btn btn-lg btn-info mr-2"
-                  to="/stock"
+                  to="/updatereview"
                 >
-                  Stock
+                  Update Review
                 </Link>
                 <Link
-                  href="price.html"
+                  href="deletereview"
                   class="btn btn-lg btn-info mr-2"
-                  to="/price"
+                  to="/deletereview"
                 >
-                  Price
+                  Delete Review
                 </Link>
                 <Link
-                  href="price.html"
+                  href="getallreviews"
                   class="btn btn-lg btn-info mr-2"
-                  to="/review"
+                  to="/getallreviews"
                 >
-                  Review
+                  Get All Reviews
                 </Link>
               </div>
             </div>

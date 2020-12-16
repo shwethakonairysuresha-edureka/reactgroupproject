@@ -21,7 +21,7 @@ const onSubmit =(e)=>{
     username : username,
     email:email,
     password:password,
-    role:['user']
+    role:['user', 'admin']
 };
 
 console.log(JSON.stringify(formData));

@@ -6,6 +6,7 @@ import Footer from "./components/layouts/Footer";
 import AdminDashboard from "./components/layouts/AdminDashboard";
 import UserDashboard from "./components/layouts/UserDashboard";
 import Product from "./components/layouts/Product";
+import Review from "./components/layouts/Review";
 
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 import Login from "./components/auth/Login";
@@ -14,6 +15,11 @@ import AddProduct from "./components/auth/AddProduct";
 import UpdateProduct1 from "./components/auth/UpdateProduct1";
 import DeleteProduct from "./components/auth/DeleteProduct";
 import PostList from './components/layouts/PostList'
+
+import AddReview from "./components/auth/AddReview";
+import UpdateReview from "./components/auth/UpdateReview";
+import DeleteReview from "./components/auth/DeleteReview";
+import GetAllReviews from "./components/auth/GetAllReviews";
 
 import {Provider} from 'react-redux';
 import store from './redux/store/store'
@@ -30,9 +36,13 @@ function App() {
       <Route exact path = "/admindashboard" component = {AdminDashboard}></Route>
       <Route exact path = "/userdashboard" component = {UserDashboard}></Route>
       <Route exact path = "/product" component = {Product}></Route>
+      <Route exact path = "/review" component = {Review}></Route>
       <Route exact path = "/addproduct" component = {AddProduct}></Route>
+      <Route exact path = "/addreview" component = {AddReview}></Route>
       <Route exact path = "/updateproduct1" component = {UpdateProduct1}></Route>
+      <Route exact path = "/updatereview" component = {UpdateReview}></Route>
       <Route exact path = "/deleteproduct" component = {DeleteProduct}></Route>
+      <Route exact path = "/getallreviews" component = {GetAllReviews}></Route>
       {/*<Route exact path = "/sample" component = {sample}></Route>*/}
       <Footer></Footer>
       </Router>

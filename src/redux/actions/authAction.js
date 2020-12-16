@@ -1,5 +1,6 @@
-import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_SUCCESS, ADDPRODUCT_SUCCESS, ADDPRODUCT_FAIL, UPDATEPRODUCT_SUCCESS, UPDATEPRODUCT_FAIL, DELETEPRODUCT_SUCCESS, DELETEPRODUCT_FAIL } from "./types"
+import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_SUCCESS, ADDPRODUCT_SUCCESS, ADDPRODUCT_FAIL, UPDATEPRODUCT_SUCCESS, UPDATEPRODUCT_FAIL, DELETEPRODUCT_SUCCESS, DELETEPRODUCT_FAIL, ADDREVIEW_SUCCESS, ADDREVIEW_FAIL, UPDATEREVIEW_SUCCESS, UPDATEREVIEW_FAIL, FETCHREVIEWS_SUCCESS, FETCHREVIEWS_FAIL } from "./types"
 import axios from 'axios'
+
 export const registerUser = formData => async dispatch=> {
     try {
         console.log(JSON.stringify(formData))
@@ -40,12 +41,6 @@ export const login =(username,password)=> async dispatch =>{
 export const addProduct = formData => async dispatch=> {
     try{
         console.log(JSON.stringify(formData))
-        //axios.defaults.headers.common['Authorization'] = Bearer + accessToken
-        // axios.use(function(req, res, next) {
-        //     res.header("Access-Control-Allow-Origin", "*");
-        //     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-        //     next();
-        //     });
         const res = await axios.post("http://localhost:9050/api/ProductCat/create", formData)
 
         dispatch({
@@ -99,5 +94,77 @@ export const deleteProduct = formData => async dispatch=> {
 
 }
 
+
+
+export const addReview = formData => async dispatch=> {
+    try{
+        console.log(JSON.stringify(formData))
+        const res = await axios.post("http://localhost:9050/api/Review/create", formData)
+
+        dispatch({
+            type:ADDREVIEW_SUCCESS,
+            payload:res.data
+        })
+    }
+    catch(err){
+        dispatch({
+            type:ADDREVIEW_FAIL
+        })
+    }
+}
+
+export const updateReview = formData => async dispatch=> {
+    try{
+        console.log(JSON.stringify(formData))
+        //axios.defaults.headers.common['Authorization'] = Bearer + accessToken
+        const res = await axios.put("http://localhost:9050/api/Review/update/"+formData.id, formData)
+
+        dispatch({
+            type:UPDATEPRODUCT_SUCCESS,
+            payload:res.data
+        })
+    }
+    catch(err){
+        dispatch({
+            type:UPDATEPRODUCT_FAIL
+        })
+    }
+}
+
+export const deleteReview = formData => async dispatch=> {
+    try{
+        console.log(JSON.stringify(formData))
+        //axios.defaults.headers.common['Authorization'] = Bearer + accessToken
+        const res = await axios.delete("http://localhost:9050/api/Review/"+formData.id, formData)
+
+        dispatch({
+            type:DELETEPRODUCT_SUCCESS,
+            payload:res.data
+        })
+    }
+    catch(err){
+        dispatch({
+            type:DELETEPRODUCT_FAIL
+        })
+    }
+}
+
+export const getallReviews = formData => async dispatch=> {
+    try{
+        console.log(JSON.stringify(formData))
+        //axios.defaults.headers.common['Authorization'] = Bearer + accessToken
+        const res = await axios.get("http://localhost:9050/api/Review", formData)
+
+        dispatch({
+            type:FETCHREVIEWS_SUCCESS,
+            payload:res.data
+        })
+    }
+    catch(err){
+        dispatch({
+            type:FETCHREVIEWS_FAIL
+        })
+    }
+}
 
 export const logout = ()=>({type:LOGOUT})
