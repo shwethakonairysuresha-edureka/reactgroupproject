@@ -37,10 +37,11 @@ export default class Landing extends Component {
                 >
                   Delete Review
                 </Link>
+                <br/>
                 <Link
                   href="getallreviews"
                   class="btn btn-lg btn-info mr-2"
-                  to="/getallreviews"
+                  to="/getallreviews1"
                 >
                   Get All Reviews
                 </Link>

@@ -50,7 +50,11 @@ export default (state = initialState, action) => {
         return {...state, loading:true}
     
     case FETCHREVIEWS_SUCCESS:
-        return { ...state, reviews:action.payload, error: '', loading:false}
+        return { 
+            loading: false,
+            reviews: action.payload, 
+            error: ''
+                }
 
     default:
         return state

@@ -157,7 +157,7 @@ export const getallReviewsRequest = () => {
 
 export const getallReviewsSuccess = reviews => {
     return {
-        type: FETCHREVIEWS_REQUEST,
+        type: FETCHREVIEWS_SUCCESS,
         payload: reviews
     }
 }
@@ -170,14 +170,12 @@ export const getallReviews = () => {
             .then(response => {
                 const reviews = response.data
                 console.log(response.data);
-                console.log(response.status);
-                console.log(response.statusText);
-                console.log(response.headers);
-                console.log(response.config);
-                dispatch({
-                    type:FETCHREVIEWS_SUCCESS,
-                    payload:response.data
-            })
+                //console.log(response.status);
+                dispatch(getallReviewsSuccess(reviews))
+                //dispatch({
+                  //  type:FETCHREVIEWS_SUCCESS,
+                    //payload:response.data
+            //})
         })
         .catch(err => {
             dispatch({

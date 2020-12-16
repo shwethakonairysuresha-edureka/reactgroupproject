@@ -3,14 +3,14 @@ import {connect} from 'react-redux'
 import {getallReviews} from '../../redux/actions/authAction'
 
 function GetAllReviews1({reviewData, getallReviews}) {
+
     useEffect(() => {
         getallReviews()
     }, [])
-    return reviewData.loading ? (
-        <h2>Loading</h2>
-    ) : reviewData.error ? (
-        <h2>{reviewData.error}</h2>
-    ) : (
+
+    console.log(reviewData)
+    return (
+
         <div>
             <h2>Reviews List</h2>
             <div>
@@ -21,13 +21,41 @@ function GetAllReviews1({reviewData, getallReviews}) {
                 }
             </div>
         </div>
+
+        //console.log(reviewData)
+        // <div>
+        //     <h2>Reviews List</h2>
+        //     <table className="table table-dark">
+        //   <thead>
+        //     <tr>
+        //       <th>Id</th>
+        //       <th>Comment</th>
+        //       <th>Rating</th>
+        //       <th>Product ID</th>
+        //       <th>Username</th>
+        //     </tr>
+        //   </thead>
+        //   <tbody>{
+        //             reviewData.map(review => (
+        //                 <tr>
+        //                 <td>{review.id}</td>
+        //                 <td>{review.comment}</td>
+        //                 <td>{review.rating}</td>
+        //                 <td>{review.productId}</td>
+        //                 <td>{review.username}</td>
+        //                 </tr>))
+        //         }</tbody>
+        //         </table>
+        // </div>
     )
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => {
+    return {
     //isAuthenticated: state.auth.isAuthenticated,
-    reviewData: state.review
-  });
+    reviewData: state.reviews
+    }
+  };
 
 const mapDispatchToProps = (dispatch) => {
     return {
