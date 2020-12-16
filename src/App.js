@@ -20,6 +20,7 @@ import AddReview from "./components/auth/AddReview";
 import UpdateReview from "./components/auth/UpdateReview";
 import DeleteReview from "./components/auth/DeleteReview";
 import GetAllReviews from "./components/auth/GetAllReviews";
+import GetAllReviews1 from "./components/auth/GetAllReviews1";
 
 import {Provider} from 'react-redux';
 import store from './redux/store/store'
@@ -42,7 +43,9 @@ function App() {
       <Route exact path = "/updateproduct1" component = {UpdateProduct1}></Route>
       <Route exact path = "/updatereview" component = {UpdateReview}></Route>
       <Route exact path = "/deleteproduct" component = {DeleteProduct}></Route>
+      <Route exact path = "/deletereview" component = {DeleteReview}></Route>
       <Route exact path = "/getallreviews" component = {GetAllReviews}></Route>
+      <Route exact path = "/getallreviews1" component = {GetAllReviews}></Route>
       {/*<Route exact path = "/sample" component = {sample}></Route>*/}
       <Footer></Footer>
       </Router>

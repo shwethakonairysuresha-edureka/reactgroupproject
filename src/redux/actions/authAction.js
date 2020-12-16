@@ -1,4 +1,4 @@
-import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_SUCCESS, ADDPRODUCT_SUCCESS, ADDPRODUCT_FAIL, UPDATEPRODUCT_SUCCESS, UPDATEPRODUCT_FAIL, DELETEPRODUCT_SUCCESS, DELETEPRODUCT_FAIL, ADDREVIEW_SUCCESS, ADDREVIEW_FAIL, UPDATEREVIEW_SUCCESS, UPDATEREVIEW_FAIL, FETCHREVIEWS_SUCCESS, FETCHREVIEWS_FAIL } from "./types"
+import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_SUCCESS, ADDPRODUCT_SUCCESS, ADDPRODUCT_FAIL, UPDATEPRODUCT_SUCCESS, UPDATEPRODUCT_FAIL, DELETEPRODUCT_SUCCESS, DELETEPRODUCT_FAIL, ADDREVIEW_SUCCESS, ADDREVIEW_FAIL, UPDATEREVIEW_SUCCESS, UPDATEREVIEW_FAIL, FETCHREVIEWS_REQUEST, FETCHREVIEWS_SUCCESS, FETCHREVIEWS_FAIL } from "./types"
 import axios from 'axios'
 
 export const registerUser = formData => async dispatch=> {
@@ -149,22 +149,45 @@ export const deleteReview = formData => async dispatch=> {
     }
 }
 
-export const getallReviews = formData => async dispatch=> {
-    try{
-        console.log(JSON.stringify(formData))
-        //axios.defaults.headers.common['Authorization'] = Bearer + accessToken
-        const res = await axios.get("http://localhost:9050/api/Review", formData)
-
-        dispatch({
-            type:FETCHREVIEWS_SUCCESS,
-            payload:res.data
-        })
+export const getallReviewsRequest = () => {
+    return {
+        type: FETCHREVIEWS_REQUEST
     }
-    catch(err){
-        dispatch({
-            type:FETCHREVIEWS_FAIL
+}
+
+export const getallReviewsSuccess = reviews => {
+    return {
+        type: FETCHREVIEWS_REQUEST,
+        payload: reviews
+    }
+}
+
+export const getallReviews = () => {
+    try{
+        return (dispatch) => {
+            dispatch(getallReviewsRequest)
+            axios.get("http://localhost:9050/api/Review/reviews")
+            .then(response => {
+                const reviews = response.data
+                console.log(response.data);
+                console.log(response.status);
+                console.log(response.statusText);
+                console.log(response.headers);
+                console.log(response.config);
+                dispatch({
+                    type:FETCHREVIEWS_SUCCESS,
+                    payload:response.data
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type:FETCHREVIEWS_FAIL
+            })
         })
     }
 }
+    catch(err){
+    }          
+    }
 
 export const logout = ()=>({type:LOGOUT})

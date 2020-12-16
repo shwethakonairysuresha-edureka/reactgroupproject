@@ -1,21 +1,38 @@
-import React, { useState, useEffect } from "react";
-import GetAllReviews from './components/layouts/GetAllReviews';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux'
+import {getallReviews} from '../../redux/actions/authAction'
 
-const GetAllReviews = () => {
-    const [reviews, setReviews] = useState([]);
-
-useEffect(() => {
-    receiveReviews();
-  }, []);
-
-const receiveReviews = () => {
-    authAction.getallReviews()
-    .then(response => {
-        setReviews(response.data);
-        console.log(response.data);
-    })
-    .catch(e => {
-        console.log(e);
-      });
-};
+function GetAllReviews1({reviewData, getallReviews}) {
+    useEffect(() => {
+        getallReviews()
+    }, [])
+    return reviewData.loading ? (
+        <h2>Loading</h2>
+    ) : reviewData.error ? (
+        <h2>{reviewData.error}</h2>
+    ) : (
+        <div>
+            <h2>Reviews List</h2>
+            <div>
+                {
+                    reviewData && 
+                    reviewData.reviews && 
+                    reviewData.reviews.map(review => <p>{review.id}</p>)
+                }
+            </div>
+        </div>
+    )
 }
+
+const mapStateToProps = (state) => ({
+    //isAuthenticated: state.auth.isAuthenticated,
+    reviewData: state.review
+  });
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getallReviews: () => dispatch(getallReviews())
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GetAllReviews1)

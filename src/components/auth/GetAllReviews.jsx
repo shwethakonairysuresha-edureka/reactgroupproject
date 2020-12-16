@@ -28,17 +28,17 @@ const GetAllReviews = ({ getallReviews }) => {
       <div className="container">
         <div className="row">
           <div className="col-md-8 m-auto">
-            <h1 className="display-4 text-center">Create Review</h1>
-            <p className="lead text-center">Add Review</p>
+            <h1 className="display-4 text-center">Get All Review</h1>
+            <p className="lead text-center">Get All Review</p>
             <form onSubmit={onSubmit}>
-              {/* <input type="submit" className="btn btn-info btn-block mt-4" /> */}
-              <Link
+              <input type="submit" className="btn btn-info btn-block mt-4" href="http://localhost:3000/getallreviews1"/>
+              {/* <Link
                   href="getallreviews1.html"
                   class="btn btn-lg btn-info mr-2"
                   to="/getallreviews1"
                 >
                   Get All Reviews
-                </Link>
+                </Link> */}
             </form>
           </div>
         </div>
