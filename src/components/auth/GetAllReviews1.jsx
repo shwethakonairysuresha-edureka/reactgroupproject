@@ -1,56 +1,50 @@
-import React, {useEffect} from 'react';
+import React, {useState,useEffect} from 'react';
 import {connect} from 'react-redux'
-import {getallReviews} from '../../redux/actions/authAction'
+//import {getallReviews} from '../../redux/actions/authAction'
+import ReactDOM from 'react-dom';
+import axios from "axios";
 
-function GetAllReviews1({reviewData, getallReviews}) {
+
+function GetAllReviews1() {
+
+    let [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        getallReviews()
+        axios
+      .get("http://localhost:9050/api/Review/reviews")
+      .then(response => setReviews(response.data));
     }, [])
-
-    console.log(reviewData)
+    const resultList = (reviews || []).map((review)=>
+    <tr key ={review.id}>
+        <td>{review.comment}</td>
+        <td>{review.rating}</td>
+        <td>{review.productId}</td>
+        <td>{review.username}</td>
+    </tr>);
+    console.log(reviews)
     return (
-
-        <div>
-            <h2>Reviews List</h2>
-            <div>
-                {
-                    reviewData && 
-                    reviewData.reviews && 
-                    reviewData.reviews.map(review => <p>{review.id}</p>)
-                }
-            </div>
+        <div className="App">
+          <h1 className="h1"> Product Results </h1>
+                <div className="reviews">
+                    <table className="table table-dark">
+                        <thead>
+                            <tr>
+                                <th className="comment-col">Comment</th>
+                                <th className="rating-col">Rating</th>
+                                <th className="productid-col">Product Id</th>
+                                <th className="username-col">Username</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>{resultList}</tbody>
+                    </table>
+                </div>
         </div>
-
-        //console.log(reviewData)
-        // <div>
-        //     <h2>Reviews List</h2>
-        //     <table className="table table-dark">
-        //   <thead>
-        //     <tr>
-        //       <th>Id</th>
-        //       <th>Comment</th>
-        //       <th>Rating</th>
-        //       <th>Product ID</th>
-        //       <th>Username</th>
-        //     </tr>
-        //   </thead>
-        //   <tbody>{
-        //             reviewData.map(review => (
-        //                 <tr>
-        //                 <td>{review.id}</td>
-        //                 <td>{review.comment}</td>
-        //                 <td>{review.rating}</td>
-        //                 <td>{review.productId}</td>
-        //                 <td>{review.username}</td>
-        //                 </tr>))
-        //         }</tbody>
-        //         </table>
-        // </div>
-    )
+      );
+    
 }
 
-const mapStateToProps = (state) => {
+/*const mapStateToProps = (state) => {
     return {
     //isAuthenticated: state.auth.isAuthenticated,
     reviewData: state.reviews
@@ -61,6 +55,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getallReviews: () => dispatch(getallReviews())
     }
-};
+};*/
 
-export default connect(mapStateToProps, mapDispatchToProps)(GetAllReviews1)
+//export default connect(mapStateToProps, mapDispatchToProps)(GetAllReviews1)
+const rootElement = document.getElementById("root");
+ReactDOM.render(<GetAllReviews1 />, rootElement);
+
+export default GetAllReviews1;
